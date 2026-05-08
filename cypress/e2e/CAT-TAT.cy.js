@@ -24,4 +24,21 @@ describe('CEntral de Atendimento ao Cliente', () => {
     cy.get('.error').should('be.visible')
   })
 
+  it('exibe mensagem de sucesso ao enviar o formulário com dados válidos', () => {
+    cy.get('button[type="submit"]').click()
+    cy.get('.success').should('be.visible')
+  })
+
+  it('limpa os campos do formulário ao clicar no botão de limpar', () => {
+    cy.get('#firstName').type('João')
+    cy.get('#lastName').type('Silva')
+    cy.get('#email').type('joao.silva@example.com')
+    cy.get('#open-text-area').type('Gostaria de mais informações sobre o serviço.')
+    cy.get('button[type="button"]').click()
+    cy.get('#firstName').should('have.value', '')
+    cy.get('#lastName').should('have.value', '')
+    cy.get('#email').should('have.value', '')
+    cy.get('#open-text-area').should('have.value', '')
+  })
+
 })
